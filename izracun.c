@@ -3,7 +3,7 @@
 #define M1 708.33f
 #define S 291.67f
 #define izhod_bruto 940.21f
-#define DOPUST 6.56f
+#define DOPUST 6.565f
 #define MINIMALNA 1024.24f
 
 int main(void){
@@ -55,16 +55,17 @@ printf("dohodnina: %.2lf €\n", dohodnina);
 
 printf("\n");
 double za_prvo_izmeno = (izhod_bruto * oddelani_dnevi / delovni_dnevi) / (ure_prva_izmena + ure_druga_izmena) * ure_prva_izmena;
-printf("REDNO DELO I. IZMENA - IZHODIŠČE PO KP %.2f €\n", za_prvo_izmeno);
+printf("REDNO DELO I. IZMENA - IZHODIŠČE PO KP: %10.2f €\n", za_prvo_izmeno);
 double za_drugo_izmeno = (izhod_bruto * oddelani_dnevi / delovni_dnevi) / (ure_prva_izmena + ure_druga_izmena) * ure_druga_izmena;
-printf("REDNO DELO II. IZMENA - IZHODIŠČE PO KP %.2f €\n", za_drugo_izmeno);
+printf("REDNO DELO II. IZMENA - IZHODIŠČE PO KP: %9.2f €\n", za_drugo_izmeno);
 double letni_dopust = ure_dopust * DOPUST;
-printf("LETNI DOPUST: %.2lf €\n", letni_dopust);
-double razlika_do_minimalne = MINIMALNA - izhod_bruto * oddelani_dnevi / delovni_dnevi;
-printf("RAZLIKA DO MINIMALNE PLAČE %.2lf €\n", razlika_do_minimalne);
+printf("LETNI DOPUST: %36.2lf €\n", letni_dopust);
+double razlika_do_minimalne = (MINIMALNA - izhod_bruto) * oddelani_dnevi / delovni_dnevi;
+printf("RAZLIKA DO MINIMALNE PLAČE: %22.2lf €\n", razlika_do_minimalne);
 double dodatek_za_izmensko = za_drugo_izmeno * 0.1;
-printf("10%% DODATEK - izmensko delo : %.2lf€\n", dodatek_za_izmensko);
-
+printf("10%% DODATEK - izmensko delo: %21.2lf €\n", dodatek_za_izmensko);
+double delovna_uspesnost = prva_bruto - dodatek_za_izmensko - za_prvo_izmeno - za_drugo_izmeno - letni_dopust - razlika_do_minimalne;
+printf("DELOVNA USPEŠNOST - znesek: %22.2lf €\n", delovna_uspesnost);
 
 
 return 0;}
