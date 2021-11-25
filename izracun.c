@@ -90,4 +90,6 @@ line(SIRINA);
 printf("SKUPAJ:%41.2lf €\n", prva_bruto);
 line(SIRINA);
 
+//PRISPEVKI NA PLAČE
+
 return 0;}
