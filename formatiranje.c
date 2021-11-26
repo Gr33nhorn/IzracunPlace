@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "formatiranje.h"
+#include <stdlib.h>
 
 void line(int sirina, char znak){
 	for(int i = 0; i < sirina; i++) printf("%c", znak);
@@ -27,3 +28,8 @@ void title(pozicija poz, char* naslov, char znak, int sirina ){
 };
 
 
+void bullet_point(char* tekst, int sirina, double znesek){
+	int n = sirina - strlen(tekst) - 3;
+	printf("%s:%*.2lf €\n", tekst, n, znesek);	
+
+}	

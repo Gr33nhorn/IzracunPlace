@@ -1,0 +1,39 @@
+
+Neto plača (€): Število vseh delovnih dni v mesecu: Število oddelanih dni v mesecu: Oddelane ure prva izmena: Oddelane ure druga izmena: Ure dopusta: 
+
+PRISPEVKI IZ PLAČE
+__________________________________________________
+ZDRAVSTVENO ZAVAROVANJE:                  -16.18 €
+POKOJNINSKO ZAVAROVANJE:                  -39.44 €
+ZAPOSLOVANJE:                              -0.36 €
+STARŠEVSKO VARSTVO:                        -0.25 €
+DOHODNINA:                               -198.20 €
+__________________________________________________
+SKUPAJ:                                   -56.23 €
+SKUPAJ Z DOHODNINO:                      -254.43 €
+__________________________________________________
+
+
+PLAČILA
+__________________________________________________
+REDNO DELO I. IZMENA - IZHODIŠČE PO KP:     -nan €
+REDNO DELO II. IZMENA - IZHODIŠČE PO KP:    -nan €
+LETNI DOPUST:                               0.00 €
+RAZLIKA DO MINIMALNE PLAČE:                 -nan €
+10% DODATEK - izmensko delo:                -nan €
+DELOVNA USPEŠNOST - znesek:                 -nan €
+__________________________________________________
+SKUPAJ:                                  -254.43 €
+__________________________________________________
+
+
+PRISPEVKI NA PLAČE
+__________________________________________________
+ZDRAVSTVENO ZAVAROVANJE:                  -16.69 €
+POKOJNINSKO ZAVAROVANJE:                  -22.52 €
+ZAPOSLOVANJE:                              -0.76 €
+STARŠEVSKO VARSTVO:                        -0.25 €
+POŠKODBE PRI DELU:                         -1.35 €
+__________________________________________________
+SKUPAJ:                                   -41.57 €
+__________________________________________________

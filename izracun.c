@@ -96,13 +96,13 @@ printf("\n\n");
 title(down, "PRISPEVKI NA PLAČE", '_', 50);
 
 double zdrav_zavarovanje_2 = 0.0656 * prva_bruto;
-printf("ZDRAVSTVENO ZAVAROVANJE:%24.2lf €\n", zdrav_zavarovanje_2);
+bullet_point("ZDRAVSTVENO ZAVAROVANJE", 50, zdrav_zavarovanje_2);
 
 double pokojninsko_zavarovanje_2 = 0.0885 * prva_bruto;
-printf("POKOJNINSKO ZAVAROVANJE:%24.2lf €\n", pokojninsko_zavarovanje_2);
+bullet_point("POKOJNISNKO ZAVAROVANJE", 50, pokojninsko_zavarovanje_2);
 
 double zaposlovanje_2 = 0.003 * prva_bruto;
-printf("ZAPOSLOVANJE:%35.2lf €\n", zaposlovanje_2);
+bullet_point("ZAPOSLOVANJE", 50, zaposlovanje_2);
 
 double starsevsko_varstvo_2 = 0.001 * prva_bruto;
 printf("STARŠEVSKO VARSTVO:%29.2lf €\n", starsevsko_varstvo_2);
