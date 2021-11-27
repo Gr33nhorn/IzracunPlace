@@ -2,7 +2,7 @@
 #include <string.h>
 #include "formatiranje.h"
 #include <stdlib.h>
-
+#include <unistd.h>
 
 void line(int sirina, char znak){
 	for(int i = 0; i < sirina; i++) printf("%c", znak);
@@ -72,13 +72,22 @@ void title(pozicija poz, h_poz h_poz, char* naslov, char znak, int sirina ){
 };
 
 
-void bullet_point(char* tekst, int sirina, double znesek){
+void bullet_point(char* tekst, int sirina, double znesek, int anim){
 	int n = sirina - strlen(tekst) - 3;
-	printf("%s:%*.2lf €\n", tekst, n, znesek);	
+	double p = znesek/1000.0;
+	double x;
+	while(x < (znesek - p) && anim){
+		printf("%s:%*.2lf €\r", tekst, n, x += p);
+		fflush(stdout);
+		usleep(900);
+		}
+	if(anim) usleep(500);	
+	printf("%s:%*.2lf €\n", tekst, n, znesek);
+	
 
 }	
 
-void cumulative(char* tekst, int sirina, double znesek){
+void cumulative(char* tekst, int sirina, double znesek, int anim){
 	line(sirina, '_');
-	bullet_point(tekst, sirina, znesek);
+	bullet_point(tekst, sirina, znesek, anim);
 }
