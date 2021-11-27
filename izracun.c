@@ -49,7 +49,7 @@ prva_bruto = (neto - 0.1 * M1 -0.26 * S) / (-0.26 * 0.779 - 0.221 + 1);
 
 printf("\n\n\n");
 
-title(up_n_down, r,"PRISPEVKI IZ PLAČE", '-', SIRINA);
+title(up_n_down, m,"PRISPEVKI IZ PLAČE", '-', SIRINA);
 
 double zdrav_zavarovanje = 0.0636 * prva_bruto;
 bullet_point("ZDRAVSTVENO ZAVAROVANJE", SIRINA, zdrav_zavarovanje);
@@ -106,7 +106,7 @@ cumulative("SKUPAJ", SIRINA, prva_bruto);
 
 printf("\n\n\n");
 
-title(up_n_down, l, "PRISPEVKI NA PLAČE", '-', SIRINA);
+title(up_n_down, m, "PRISPEVKI NA PLAČE", '-', SIRINA);
 
 double zdrav_zavarovanje_2 = 0.0656 * prva_bruto;
 bullet_point("ZDRAVSTVENO ZAVAROVANJE", SIRINA, zdrav_zavarovanje_2);
@@ -126,7 +126,10 @@ bullet_point("POSKODBE PRI DELU", SIRINA, poskodbe_pri_delu);
 cumulative("SKUPAJ", SIRINA, prva_bruto * 0.221);
 
 
-int sirina = 100;
-printf("%*s\n", (int)sirina/2, "TEST");
+/*for(int i = 0; i < 100000000; i++) {
+	printf("\r%d%*s",i, 10, "jajca");
+	fflush(stdout);}*/
+
+
 
 return 0;}
