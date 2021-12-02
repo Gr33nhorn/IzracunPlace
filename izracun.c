@@ -4,8 +4,8 @@
 
 
 
-#define SIRINA 100
-#define BP_ANIM  0
+#define SIRINA 60
+#define BP_ANIM  1
 #define C_ANIM  1
 
 #define M1 708.33f
@@ -133,9 +133,6 @@ bullet_point("POSKODBE PRI DELU", SIRINA, poskodbe_pri_delu, BP_ANIM);
 cumulative("SKUPAJ", SIRINA, prva_bruto * PRCNT_DAVEK2, C_ANIM);
 
 
-/*for(int i = 0; i < 100000000; i++) {
-	printf("\r%d%*s",i, 10, "jajca");
-	fflush(stdout);}*/
 
 
 

@@ -5,23 +5,39 @@
 #include <unistd.h>
 
 void line(int sirina, char znak){
-	for(int i = 0; i < sirina; i++) printf("%c", znak);
+	FILE* file = fopen("izracun.txt", "a");
+	for(int i = 0; i < sirina; i++){
+		printf("%c", znak);
+		fprintf(file, "%c", znak);
+	}
 	printf("\n");
+	fprintf(file, "\n");
+	fclose(file);
 };
 
 
 void l(char* naslov, int sirina){
-			printf("%s\n", naslov);
-			};
+	FILE* file = fopen("izracun.txt", "a");
+	fprintf(file, "%s\n", naslov);			
+	printf("%s\n", naslov);
+	fclose(file);
+	
+};
 
 			
 void m(char* naslov, int sirina){
-			printf("%*s\n", (int)(sirina + strlen(naslov))/2, naslov);
+	printf("%*s\n", (int)(sirina + strlen(naslov))/2, naslov);
+	FILE* file = fopen("izracun.txt", "a");
+	fprintf(file, "%*s\n", (int)(sirina + strlen(naslov))/2, naslov);
+	fclose(file);
 };
 
 
 void r(char* naslov, int sirina){
-			printf("%*s\n", sirina + 1, naslov);
+	printf("%*s\n", sirina + 1, naslov);
+	FILE* file = fopen("izracun.txt", "a");
+	fprintf(file, "%*s\n", sirina + 1, naslov);
+	fclose(file);
 };
 
 
@@ -56,8 +72,7 @@ void middle(char* naslov, h_poz h_poz, char znak, int sirina){
 		for(int i = 0; i < (sirina - strlen(naslov) + 1); i++) printf("%c", znak);
 		printf("\n");
 		}
-		
-	//for(int i = 0; i < (sirina - strlen(naslov))/2; i++) printf("%c", znak);
+
 };
 
 
@@ -83,7 +98,9 @@ void bullet_point(char* tekst, int sirina, double znesek, int anim){
 		}
 	if(anim) usleep(500);	
 	printf("%s:%*.2lf €\n", tekst, n, znesek);
-	
+	FILE* file = fopen("izracun.txt", "a");
+	fprintf(file, "%s:%*.2lf €\n", tekst, n, znesek);
+	fclose(file);
 
 }	
 
@@ -91,3 +108,5 @@ void cumulative(char* tekst, int sirina, double znesek, int anim){
 	line(sirina, '_');
 	bullet_point(tekst, sirina, znesek, anim);
 }
+
+
