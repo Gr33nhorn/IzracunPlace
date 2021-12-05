@@ -1,12 +1,12 @@
 #include <stdio.h>
 #include "formatiranje.h"
-
-
+#include <sqlite3.h>
+#include "baza.h"
 
 
 #define SIRINA 60
-#define BP_ANIM  1
-#define C_ANIM  1
+#define BP_ANIM  0
+#define C_ANIM  0
 
 #define M1 708.33f
 #define S 291.67f
@@ -132,8 +132,9 @@ bullet_point("POSKODBE PRI DELU", SIRINA, poskodbe_pri_delu, BP_ANIM);
 
 cumulative("SKUPAJ", SIRINA, prva_bruto * PRCNT_DAVEK2, C_ANIM);
 
-
-
-
+sqlite3* db;
+open_db(&db, "nova");
+insert(db, 3, "POSKODBE PRI DELU", 23);
+select_all(db);
 
 return 0;}
