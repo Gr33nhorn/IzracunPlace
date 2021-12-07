@@ -101,3 +101,13 @@ int select_all(sqlite3* db){
 	sqlite3_finalize(stmt);
 	return 0;
 }
+
+
+int calc_and_insert(){
+
+
+
+
+
+return 0;
+}

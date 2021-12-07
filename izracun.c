@@ -2,7 +2,8 @@
 #include "formatiranje.h"
 #include <sqlite3.h>
 #include "baza.h"
-
+#include <time.h>
+#include "racuni.h"
 
 #define SIRINA 60
 #define BP_ANIM  0
@@ -53,7 +54,7 @@ printf("Ure dopusta: ");
 scanf("%d", &ure_dopust);
 
 double prva_bruto;
-prva_bruto = (neto - 0.1 * M1 -0.26 * S) / (-0.26 * 0.779 - 0.221 + 1);
+prva_bruto = bruto_placa_1(950.0, S, M1);
 
 //PRISPEVKI IZ PLAČE*****************************
 
@@ -61,21 +62,21 @@ printf("\n\n\n");
 
 title(up_n_down, m,"PRISPEVKI IZ PLAČE", '-', SIRINA);
 
-double zdrav_zavarovanje = PRCNT_ZDRAV_ZAV1 * prva_bruto;
+double zdrav_zavarovanje = zdravstveno_zavarovanje_1(prva_bruto, PRCNT_ZDRAV_ZAV1);
 bullet_point("ZDRAVSTVENO ZAVAROVANJE", SIRINA, zdrav_zavarovanje, BP_ANIM);
 
-double pokojninsko_zavarovanje = PRCNT_POKOJNINSKO_ZAV1 * prva_bruto;
+double pokojninsko_zavarovanje = pokojninsko_zavarovanje_1(prva_bruto, PRCNT_POKOJNINSKO_ZAV1);
 bullet_point("POKOJNINSKO ZAVAROVANJE", SIRINA, pokojninsko_zavarovanje, BP_ANIM);
 
-double zaposlovanje = PRCNT_ZAPOSLOVANJE1 * prva_bruto;
+double zaposlovanje = zaposlovanje_1(prva_bruto, PRCNT_ZAPOSLOVANJE1);
 bullet_point("ZAPOSLOVANJE", SIRINA, zaposlovanje, BP_ANIM);
 
-double starsevsko_varstvo = PRCNT_STAR_VARSTVO1 * prva_bruto;
+double starsevsko_varstvo = starsevsko_varstvo_1(prva_bruto, PRCNT_STAR_VARSTVO1);
 bullet_point("STARSEVSKO VARSTVO", SIRINA, starsevsko_varstvo, BP_ANIM);
 
 double prispevki = zdrav_zavarovanje + pokojninsko_zavarovanje + zaposlovanje + starsevsko_varstvo;
-double osnova_za_dohodnino = prva_bruto - prispevki - S;
-double dohodnina = 0.16 * M1 + (osnova_za_dohodnino - M1) * 0.26;
+double osnova_za_dohodnino = osnova_dohodnina(prva_bruto, prispevki, S);
+double dohodnina = f_dohodnina(osnova_za_dohodnino, M1);
 bullet_point("DOHODNINA", SIRINA, dohodnina, BP_ANIM);
 
 cumulative("SKUPAJ", SIRINA, prispevki, C_ANIM);
@@ -88,22 +89,22 @@ printf("\n\n\n");
 
 title(up_n_down, m, "PLAČILA", '-', SIRINA);
 
-double za_prvo_izmeno = (izhod_bruto * oddelani_dnevi / delovni_dnevi) / (ure_prva_izmena + ure_druga_izmena) * ure_prva_izmena;
+double za_prvo_izmeno = izmena(izhod_bruto , oddelani_dnevi, delovni_dnevi, ure_prva_izmena, ure_druga_izmena);
 bullet_point("REDNO DELO I. IZMENA - IZHODISCE PO KP", SIRINA, za_prvo_izmeno, BP_ANIM);
 
-double za_drugo_izmeno = (izhod_bruto * oddelani_dnevi / delovni_dnevi) / (ure_prva_izmena + ure_druga_izmena) * ure_druga_izmena;
+double za_drugo_izmeno = izmena(izhod_bruto , oddelani_dnevi, delovni_dnevi, ure_druga_izmena, ure_prva_izmena);
 bullet_point("REDNO DELO II. IZMENA - IZHODISCE PO KP", SIRINA, za_drugo_izmeno, BP_ANIM);
 
-double letni_dopust = ure_dopust * DOPUST;
+double letni_dopust = let_dopust(ure_dopust, DOPUST);
 bullet_point("LETNI DOPUST", SIRINA, letni_dopust, BP_ANIM);
 
-double razlika_do_minimalne = (MINIMALNA - izhod_bruto) * oddelani_dnevi / delovni_dnevi;
+double razlika_do_minimalne = dif_do_minimalne(izhod_bruto, oddelani_dnevi, delovni_dnevi, MINIMALNA);
 bullet_point("RAZLIKA DO MINIMALNE PLACE", SIRINA, razlika_do_minimalne, BP_ANIM);
 
-double dodatek_za_izmensko = za_drugo_izmeno * PRCNT_IZMEN_DELO;
+double dodatek_za_izmensko = dod_pop_izmena(za_drugo_izmeno, PRCNT_IZMEN_DELO);
 bullet_point("10% DODATEK - izmensko delo", SIRINA, dodatek_za_izmensko, BP_ANIM);
 
-double delovna_uspesnost = prva_bruto - dodatek_za_izmensko - za_prvo_izmeno - za_drugo_izmeno - letni_dopust - razlika_do_minimalne;
+double delovna_uspesnost = uspesnost(prva_bruto, dodatek_za_izmensko, za_prvo_izmeno, za_drugo_izmeno, letni_dopust, razlika_do_minimalne);
 bullet_point("DELOVNA USPESNOST", SIRINA, delovna_uspesnost, BP_ANIM);
 
 cumulative("SKUPAJ", SIRINA, prva_bruto, C_ANIM);
@@ -132,9 +133,14 @@ bullet_point("POSKODBE PRI DELU", SIRINA, poskodbe_pri_delu, BP_ANIM);
 
 cumulative("SKUPAJ", SIRINA, prva_bruto * PRCNT_DAVEK2, C_ANIM);
 
-sqlite3* db;
+/*sqlite3* db;
 open_db(&db, "nova");
 insert(db, 3, "POSKODBE PRI DELU", 23);
 select_all(db);
 
+time_t tajm;
+struct tm *info;
+time(&tajm);
+info = localtime(&tajm);
+printf("%s", asctime(info));*/
 return 0;}
