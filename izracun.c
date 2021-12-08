@@ -56,22 +56,23 @@ scanf("%d", &ure_dopust);
 double prva_bruto;
 prva_bruto = bruto_placa_1(950.0, S, M1);
 
+
 //PRISPEVKI IZ PLAČE*****************************
 
 printf("\n\n\n");
 
 title(up_n_down, m,"PRISPEVKI IZ PLAČE", '-', SIRINA);
 
-double zdrav_zavarovanje = zdravstveno_zavarovanje_1(prva_bruto, PRCNT_ZDRAV_ZAV1);
+double zdrav_zavarovanje = zdravstveno_zavarovanje(prva_bruto, PRCNT_ZDRAV_ZAV1);
 bullet_point("ZDRAVSTVENO ZAVAROVANJE", SIRINA, zdrav_zavarovanje, BP_ANIM);
 
-double pokojninsko_zavarovanje = pokojninsko_zavarovanje_1(prva_bruto, PRCNT_POKOJNINSKO_ZAV1);
+double pokojninsko_zavarovanje = pok_zavarovanje(prva_bruto, PRCNT_POKOJNINSKO_ZAV1);
 bullet_point("POKOJNINSKO ZAVAROVANJE", SIRINA, pokojninsko_zavarovanje, BP_ANIM);
 
-double zaposlovanje = zaposlovanje_1(prva_bruto, PRCNT_ZAPOSLOVANJE1);
+double zaposlovanje = f_zaposlovanje(prva_bruto, PRCNT_ZAPOSLOVANJE1);
 bullet_point("ZAPOSLOVANJE", SIRINA, zaposlovanje, BP_ANIM);
 
-double starsevsko_varstvo = starsevsko_varstvo_1(prva_bruto, PRCNT_STAR_VARSTVO1);
+double starsevsko_varstvo = star_varstvo(prva_bruto, PRCNT_STAR_VARSTVO1);
 bullet_point("STARSEVSKO VARSTVO", SIRINA, starsevsko_varstvo, BP_ANIM);
 
 double prispevki = zdrav_zavarovanje + pokojninsko_zavarovanje + zaposlovanje + starsevsko_varstvo;
@@ -116,28 +117,28 @@ printf("\n\n\n");
 
 title(up_n_down, m, "PRISPEVKI NA PLAČE", '-', SIRINA);
 
-double zdrav_zavarovanje_2 = PRCNT_ZDRAV_ZAV2 * prva_bruto;
+double zdrav_zavarovanje_2 = zdravstveno_zavarovanje(prva_bruto, PRCNT_ZDRAV_ZAV2);
 bullet_point("ZDRAVSTVENO ZAVAROVANJE", SIRINA, zdrav_zavarovanje_2, BP_ANIM);
 
-double pokojninsko_zavarovanje_2 = PRCNT_POKOJNINSKO_ZAV2 * prva_bruto;
+double pokojninsko_zavarovanje_2 = pok_zavarovanje(prva_bruto, PRCNT_POKOJNINSKO_ZAV2);
 bullet_point("POKOJNISNKO ZAVAROVANJE", SIRINA, pokojninsko_zavarovanje_2, BP_ANIM);
 
-double zaposlovanje_2 = PRCNT_ZAPOSLOVANJE2 * prva_bruto;
+double zaposlovanje_2 = f_zaposlovanje(prva_bruto, PRCNT_ZAPOSLOVANJE2);
 bullet_point("ZAPOSLOVANJE", SIRINA, zaposlovanje_2, BP_ANIM);
 
-double starsevsko_varstvo_2 = PRCNT_STAR_VARSTVO2 * prva_bruto;
+double starsevsko_varstvo_2 = star_varstvo(prva_bruto, PRCNT_STAR_VARSTVO2);
 bullet_point("STARSEVSKO VARSTVO", SIRINA, starsevsko_varstvo_2, BP_ANIM);
 
-double poskodbe_pri_delu = PRCNT_POSKODBE_PRI_DELU * prva_bruto;
+double poskodbe_pri_delu = poskodbe(prva_bruto, PRCNT_POSKODBE_PRI_DELU);
 bullet_point("POSKODBE PRI DELU", SIRINA, poskodbe_pri_delu, BP_ANIM);
 
 cumulative("SKUPAJ", SIRINA, prva_bruto * PRCNT_DAVEK2, C_ANIM);
 
-/*sqlite3* db;
-open_db(&db, "nova");
-insert(db, 3, "POSKODBE PRI DELU", 23);
-select_all(db);
-
+sqlite3* db;
+open_db(&db, "Place.db");
+db_insert(db, neto, delovni_dnevi, oddelani_dnevi, ure_prva_izmena, ure_druga_izmena);
+db_select_all(db);
+/*
 time_t tajm;
 struct tm *info;
 time(&tajm);

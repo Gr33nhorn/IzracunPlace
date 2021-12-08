@@ -22,7 +22,7 @@ int open_db(sqlite3** db, char* db_ime){
 	}	
 		
 	sqlite3_stmt* stmt = NULL;
-	char* sql = "CREATE TABLE IF NOT EXISTS Place(id int UNIQUE, ime text, znesek float)";
+	char* sql = "CREATE TABLE IF NOT EXISTS Place('neto placa' double, 'delavni dnevi' int, 'oddelani dnevi' int, 'prva izmena (h)' int, 'druga izmena (h)' int);";
 
 	r = sqlite3_prepare_v2(*db, sql, -1, &stmt, NULL);
 	if(r != SQLITE_OK){
@@ -41,45 +41,7 @@ int open_db(sqlite3** db, char* db_ime){
 	return 0;
 }
 
-
-
-int insert(sqlite3* db, int indx, char* vrsta_zneska, double znesek){
-
-	sqlite3_stmt* stmt = NULL;
-	char* sql = "INSERT INTO Place (id, ime, znesek) VALUES(?1, ?2, ?3)";
-	int r;
-	
-	r = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL);
-	if(r != SQLITE_OK){
-		printf("%s\n", sqlite3_errmsg(db));
-		exit(-1);
-	}
-
-	int idx;
-	int txt;
-	int dbl;
-
-	idx = sqlite3_bind_int(stmt, 1, indx);
-	txt = sqlite3_bind_text(stmt, 2, vrsta_zneska, -1, NULL);
-	dbl = sqlite3_bind_int(stmt, 3, znesek);
-
-	if(txt != SQLITE_OK){
-		printf("%s\n", sqlite3_errmsg(db));
-		exit(-1);
-	}
-	r = sqlite3_step(stmt);	
-	if(r != SQLITE_DONE){
-		printf("%s\n", sqlite3_errmsg(db));
-		exit(-1);
-	}
-
-	sqlite3_finalize(stmt);
-	
-	return 0;
-}
-
-
-int select_all(sqlite3* db){
+int db_select_all(sqlite3* db){
 
 	sqlite3_stmt* stmt = NULL;
 	char* sql = "SELECT * FROM Place";
@@ -103,11 +65,31 @@ int select_all(sqlite3* db){
 }
 
 
-int calc_and_insert(){
+int db_insert(sqlite3* db, double neto, int delavni, int oddelani, int prva, int druga){
 
+	sqlite3_stmt* stmt = NULL;
+	char* sql = "INSERT INTO Place('neto placa', 'delavni dnevi', 'oddelani dnevi', 'prva izmena (h)', 'druga izmena (h)') VALUES(?1, ?2, ?3, ?4, ?5);";
+	int r;
+	
+	r = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL);
+	if(r != SQLITE_OK){
+		printf("%s\n", sqlite3_errmsg(db));
+		exit(-1);
+	}
 
+	sqlite3_bind_double(stmt, 1, neto);
+	sqlite3_bind_int(stmt, 2, delavni);
+	sqlite3_bind_int(stmt, 3, oddelani);
+	sqlite3_bind_int(stmt, 4, prva);
+	sqlite3_bind_int(stmt, 5, druga);
 
+	r = sqlite3_step(stmt);	
+	if(r != SQLITE_DONE){
+		printf("%s\n", sqlite3_errmsg(db));
+		exit(-1);
+	}
 
-
-return 0;
+	sqlite3_finalize(stmt);
+	
+	return 0;	
 }
