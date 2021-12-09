@@ -136,12 +136,8 @@ cumulative("SKUPAJ", SIRINA, prva_bruto * PRCNT_DAVEK2, C_ANIM);
 
 sqlite3* db;
 open_db(&db, "Place.db");
-db_insert(db, neto, delovni_dnevi, oddelani_dnevi, ure_prva_izmena, ure_druga_izmena);
+//db_insert(db, neto, delovni_dnevi, oddelani_dnevi, ure_prva_izmena, ure_druga_izmena);
+db_delete(db, 1);
 db_select_all(db);
-/*
-time_t tajm;
-struct tm *info;
-time(&tajm);
-info = localtime(&tajm);
-printf("%s", asctime(info));*/
+
 return 0;}
